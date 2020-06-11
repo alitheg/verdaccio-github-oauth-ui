@@ -24,7 +24,7 @@ fail() {
 # Commands
 ##################################################
 
-pluginDir=plugins/verdaccio-github-oauth-ui
+linkdir=node_modules/verdaccio-google-oauth-ui
 
 #
 # Remove the plugin from node_modules

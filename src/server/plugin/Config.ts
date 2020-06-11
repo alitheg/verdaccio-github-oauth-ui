@@ -207,15 +207,7 @@ export class ParsedPluginConfig {
             this.configuredGroupsMap[group] = true
           }
 
-          if (key1 === "org" && !key2) {
-            const parsedOrg: ParsedOrg = {
-              group,
-              org: value1,
-            }
-            this.parsedOrgs.push(parsedOrg)
-            this.configuredGroupsMap[group] = true
-          }
-        })
-    })
-  }
+  ensurePropExists(config, "org")
+  ensurePropExists(config, "client-id")
+  ensurePropExists(config, "client-secret")
 }

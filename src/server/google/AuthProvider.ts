@@ -29,7 +29,7 @@ export class GoogleAuthProvider implements AuthProvider {
   ) { }
 
   getId() {
-    return "github"
+    return "google"
   }
 
   getLoginUrl(callbackUrl: string) {

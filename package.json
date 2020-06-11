@@ -1,10 +1,8 @@
 {
-  "$schema": "http://json.schemastore.org/package",
-  "name": "verdaccio-github-oauth-ui",
+  "name": "verdaccio-google-oauth-ui",
   "version": "5.0.3",
   "keywords": [
-    "authentication",
-    "github",
+    "google",
     "login",
     "npm",
     "oauth",
@@ -16,16 +14,16 @@
     "verdaccio-auth-plugin",
     "verdaccio-plugin"
   ],
-  "homepage": "https://github.com/n4bb12/verdaccio-github-oauth-ui/blob/master/README.md",
-  "bugs": "https://github.com/n4bb12/verdaccio-github-oauth-ui/issues",
-  "repository": "github:n4bb12/verdaccio-github-oauth-ui",
+  "homepage": "https://github.com/alitheg/verdaccio-google-oauth-ui/blob/master/README.md",
+  "bugs": "https://github.com/alitheg/verdaccio-google-oauth-ui/issues",
+  "repository": "github:alitheg/verdaccio-google-oauth-ui",
   "license": "MIT",
-  "author": "Abraham Schilling",
-  "main": "dist/server/index.js",
-  "bin": "dist/cli/index.js",
+  "author": "Alastair McFarlane",
   "files": [
     "dist"
   ],
+  "main": "dist/server/index.js",
+  "bin": "dist/cli/index.js",
   "scripts": {
     "build": "bash run build",
     "clean": "bash run clean",

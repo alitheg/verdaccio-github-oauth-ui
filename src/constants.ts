@@ -4,6 +4,9 @@ export { plugin }
 
 export const cliName = plugin.name
 export const pluginKey = plugin.name.replace("verdaccio-", "")
+export const pluginName = "google-oauth-ui"
+export const publicRoot = __dirname + "/public"
+export const staticPath = "/-/static/" + pluginName
 export const authorizePath = "/-/oauth/authorize"
 export const callbackPath = "/-/oauth/callback"
 export const loginHref = authorizePath

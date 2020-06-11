@@ -12,14 +12,17 @@ log:
   level: info
 
 middlewares:
-  github-oauth-ui:
+  audit:
+    enabled: true
+  google-oauth-ui:
     enabled: true
 
 auth:
-  github-oauth-ui:
-    client-id: GITHUB_CLIENT_ID
-    client-secret: GITHUB_CLIENT_SECRET
-    token: GITHUB_TOKEN
+  google-oauth-ui:
+    domain: GOOGLE_DOMAIN # required, people within this org will be able to authenticate
+    client-id: GOOGLE_CLIENT_ID # required
+    client-secret: GOOGLE_CLIENT_SECRET # required
+    # enterprise-origin: GITHUB_ENTERPRISE_ORIGIN # optional, set this if you are using github enterprise
   htpasswd:
     file: ./htpasswd
     algorithm: bcrypt

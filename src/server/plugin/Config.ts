@@ -135,19 +135,10 @@ export class ParsedPluginConfig {
     assert.string.nonEmpty,
   )
 
-  readonly token = getConfigValue<string>(
+  readonly domain = getConfigValue<string>(
     this.config,
-    "token",
+    "domain",
     assert.string.nonEmpty,
-  )
-
-  readonly enterpriseOrigin = getConfigValue<string | undefined>(
-    this.config,
-    "enterprise-origin",
-    assert.any(
-      assert.undefined,
-      assert.string.url.nonEmpty.not.startsWith(publicGitHubOrigin),
-    ),
   )
 
   constructor(readonly config: Config) {

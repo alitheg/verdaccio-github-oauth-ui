@@ -5,7 +5,9 @@ import { ParsedPluginConfig } from "./Config"
 import { User, Verdaccio } from "./Verdaccio"
 
 export class AuthCore {
+
   private readonly requiredGroup = 'google'
+
   constructor(
     private readonly verdaccio: Verdaccio,
     private readonly config: ParsedPluginConfig,

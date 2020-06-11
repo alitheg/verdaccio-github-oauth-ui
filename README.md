@@ -7,14 +7,24 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/verdaccio-github-oauth-ui">
-    <img alt="Version" src="https://flat.badgen.net/npm/v/verdaccio-github-oauth-ui?icon=npm">
+  <a href="https://www.npmjs.com/package/verdaccio-google-oauth-ui">
+    <img alt="Version" src="https://flat.badgen.net/npm/v/verdaccio-google-oauth-ui?icon=npm">
   </a>
-  <a href="https://raw.githubusercontent.com/n4bb12/verdaccio-github-oauth-ui/master/LICENSE">
-    <img alt="License" src="https://flat.badgen.net/github/license/n4bb12/verdaccio-github-oauth-ui?icon=github">
+  <a href="https://raw.githubusercontent.com/alitheg/verdaccio-google-oauth-ui/master/LICENSE">
+    <img alt="License" src="https://flat.badgen.net/github/license/alitheg/verdaccio-google-oauth-ui?icon=github">
   </a>
-  <a href="https://github.com/n4bb12/verdaccio-github-oauth-ui/issues/new/choose">
-    <img alt="Issues" src="https://flat.badgen.net/badge/github/Create Issue/blue?icon=github">
+  <a href="https://github.com/alitheg/verdaccio-google-oauth-ui/issues/new/choose">
+    <img alt="Issues" src="https://flat.badgen.net/badge/github/create issue/pink?icon=github">
+  </a>
+  <a href="https://circleci.com/gh/alitheg/verdaccio-google-oauth-ui">
+    <img alt="CircleCI" src="https://flat.badgen.net/circleci/github/alitheg/verdaccio-google-oauth-ui/master?icon=circleci">
+  </a>
+  <a href="https://codecov.io/github/alitheg/verdaccio-google-oauth-ui">
+    <img alt="Coverage" src="https://flat.badgen.net/codecov/c/github/alitheg/verdaccio-google-oauth-ui?icon=codecov">
+  </a>
+  <a href="https://snyk.io/test/github/alitheg/verdaccio-google-oauth-ui?targetFile=package.json"><img src="https://snyk.io/test/github/alitheg/verdaccio-google-oauth-ui/badge.svg?targetFile=package.json" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/alitheg/verdaccio-google-oauth-ui?targetFile=package.json" style="max-width:100%;"></a>
+  <a href="https://david-dm.org/alitheg/verdaccio-google-oauth-ui">
+    <img alt="Dependencies" src="https://flat.badgen.net/david/dep/alitheg/verdaccio-google-oauth-ui?icon=npm">
   </a>
 </p>
 
@@ -23,6 +33,8 @@
 <img src="screenshots/authorize.png" align="right" width="270"/>
 
 This is a Verdaccio plugin that offers Google OAuth integragtion for both the browser and the command line.
+
+Thanks to https://github.com/n4bb12/verdaccio-github-oauth-ui for most of the original work on this!
 
 ### Features
 
@@ -64,11 +76,10 @@ middlewares:
 
 auth:
   google-oauth-ui:
-    client-id: GITHUB_CLIENT_ID
-    client-secret: GITHUB_CLIENT_SECRET
+    client-id: GOOGLE_CLIENT_ID
+    client-secret: GOOGLE_CLIENT_SECRET
     domain: GOOGLE_DOMAIN
 
-url_prefix: YOUR_REGISTRY_URL
 ```
 
 - The configured values can either be the actual value or the name of an environment variable that contains the value.
@@ -80,15 +91,11 @@ Users within this domain will be able to authenticate.
 
 #### `client-id` and `client-secret`
 
-These values can be obtained from GitHub OAuth app page at https://github.com/settings/developers.
-
-#### `url_prefix` (optional)
-
-If configured, it must match `YOUR_REGISTRY_URL`. See [GitHub Config](#GitHub-Config).
+These values can be obtained from Google credentials page https://console.developers.google.com/apis/credentials.
 
 ### Proxy Config
 
-If you are behind a proxy server, the plugin needs to know the proxy server in order to make GitHub requests.
+If you are behind a proxy server, the plugin needs to know the proxy server in order to make Google requests.
 
 Configure the below environment variable.
 
@@ -96,7 +103,7 @@ Configure the below environment variable.
 $ export GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:8080
 ```
 
-See the [global-agent](https://github.com/gajus/global-agent#environment-variables) docs for detailed configuration instrcutions.
+See the [global-agent](https://github.com/gajus/global-agent#environment-variables) docs for detailed configuration instructions.
 
 ## Login
 

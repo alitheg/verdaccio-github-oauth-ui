@@ -12,16 +12,6 @@ export class GoogleAuthProvider implements AuthProvider {
   private readonly requiredDomain = this.config.domain
   private readonly client = new GoogleClient(this.authBaseUrl, this.tokenBaseUrl, this.userInfoBaseUrl)
 
-  // get webBaseUrl(): string {
-  //   return this.enterpriseOrigin || "https://github.com"
-  // }
-
-  // get apiBaseUrl(): string {
-  //   return this.enterpriseOrigin
-  //     ? this.enterpriseOrigin.replace(/\/?$/, "") + "/api/v3"
-  //     : "https://api.github.com"
-  // }
-
   get authBaseUrl(): string {
     return "https://accounts.google.com"
   }
@@ -47,7 +37,7 @@ export class GoogleAuthProvider implements AuthProvider {
       client_id: this.clientId,
       redirect_uri: callbackUrl,
       scope: "openid email profile",
-      response_type: "code",
+      response_type: "code"
     }
     if(this.requiredDomain) params.hd = this.requiredDomain
     const queryParams = stringify(params)

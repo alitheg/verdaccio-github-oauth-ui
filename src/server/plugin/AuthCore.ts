@@ -5,6 +5,7 @@ import { ParsedPluginConfig } from "./Config"
 import { User, Verdaccio } from "./Verdaccio"
 
 export class AuthCore {
+  private readonly requiredGroup = 'google'
   constructor(
     private readonly verdaccio: Verdaccio,
     private readonly config: ParsedPluginConfig,
@@ -44,4 +45,30 @@ export class AuthCore {
 
     return url
   }
+
+  canAuthenticate(username: string) {
+    return true;
+    if (!allow) {
+      logger.error(this.getDeniedMessage(username))
+    }
+    return allow
+  }
+
+  canAccess(username: string, groups: string[], requiredGroups: string[]) {
+    if (requiredGroups.includes("$authenticated")) {
+      requiredGroups.push(this.requiredGroup)
+    }
+    const grantedAccess = [];//intersection(groups, requiredGroups)
+
+    const allow = grantedAccess.length === requiredGroups.length
+    if (!allow) {
+      logger.error(this.getDeniedMessage(username))
+    }
+    return allow
+  }
+
+  getDeniedMessage(username: string) {
+    return `Access denied: User "${username}" is not a member of "${this.requiredGroup}"`
+  }
+
 }

@@ -52,20 +52,21 @@ export class WebFlow implements IPluginMiddleware<any> {
    * There is no need to later decode and decrypt the token. This process is
    * automatically reversed by verdaccio before passing it to the plugin.
    */
-  callback: Handler = async (req, res) => {
+  callback: Handler = async (req, res, next) => {
     const withBackLink = true
-
     try {
-      const code = this.provider.getCode(req)
-      const userToken = await this.provider.getToken(code)
-      const userName = await this.provider.getUserName(userToken)
-      const userGroups = await this.provider.getGroups(userName)
-      const uiCallbackUrl = await this.core.createUiCallbackUrl(
-        userName,
-        userGroups,
-        userToken,
-      )
-      res.redirect(uiCallbackUrl)
+      const redirectUrl = this.getRedirectUrl(req)
+      const code = await this.provider.getCode(req)
+      const token = await this.provider.getToken(code, redirectUrl)
+      const username = await this.provider.getUserName(token)
+      const userGroups = await this.provider.getGroups(username)
+
+      // if (this.core.canAuthenticate(username)) {
+        const ui = await this.core.createUiCallbackUrl(username, userGroups, token)
+        res.redirect(ui)
+      // } else {
+      //   res.send(errorPage)
+      // }
     } catch (error) {
       logger.error(error)
 

@@ -23,6 +23,8 @@ export class GoogleClient {
       json: {
         client_id: clientId,
         client_secret: clientSecret,
+        grant_type: 'authorization_code',
+        redirect_uri: redirectUrl
         code,
         grant_type: 'authorization_code',
         redirect_uri: redirectUrl,

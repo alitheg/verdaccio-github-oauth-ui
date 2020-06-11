@@ -49,7 +49,10 @@ export class GoogleClient {
         Authorization: "Bearer " + accessToken,
       },
     } as const
-    return got(url, options).json()
+    return got(url, options).json().catch(e => {
+      logger.error(e)
+      throw e
+    })
   }
 
 }

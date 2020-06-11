@@ -72,7 +72,10 @@ read-env() {
   fi
 }
 
-cli-login() {
+#
+# Sinopia CLI test
+#
+oauth-cli-test() {
   # npx verdaccio-github-oauth-ui --registry http://localhost:4873
   run cli-login ./dist/cli/index.js --registry http://localhost:4873
 }

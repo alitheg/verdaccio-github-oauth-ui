@@ -22,6 +22,7 @@ import { Auth, Verdaccio } from "./Verdaccio"
  * Implements the verdaccio plugin interfaces.
  */
 export class Plugin implements IPluginMiddleware<any>, IPluginAuth<any> {
+  private readonly requiredGroup = 'google'
   private readonly parsedConfig = new ParsedPluginConfig(this.config)
   private readonly provider = new GoogleAuthProvider(this.parsedConfig)
   private readonly cache = new Cache(this.provider)

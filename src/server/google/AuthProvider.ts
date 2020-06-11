@@ -61,4 +61,5 @@ export class GoogleAuthProvider implements AuthProvider {
   async getGroups(token: string) {
     return ['google']
   }
+
 }

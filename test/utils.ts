@@ -129,11 +129,8 @@ export function createTestAuthProvider() {
       }
       throw new Error(testErrorMessage)
     },
-    async getGroups(userName: string) {
-      if (userName === testUserName) {
-        return [...testProviderGroups]
-      }
-      return []
+    async getGroups(token: string) {
+      return ['google']
     },
   }
   return provider

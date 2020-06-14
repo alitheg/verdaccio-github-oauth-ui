@@ -3,8 +3,8 @@ import { Plugin } from "src/server/plugin/Plugin"
 import {
   createTestPlugin,
   testOAuthToken,
-  testProviderGroups,
   testUserName,
+  testProviderGroups
 } from "test/utils"
 import { beforeEach, describe, expect, it } from "vitest"
 
@@ -18,6 +18,19 @@ describe("Plugin", () => {
     let plugin: Plugin
 
     beforeEach(() => {
+      // AuthProvider.mockImplementation(() => {
+      //   return {
+      //     async getId() {
+      //       return "test"
+      //     },
+      //     async getUsername(token: string) {
+      //       return token === testOAuthToken ? testUsername : ""
+      //     },
+      //     async getGroups(token: string) {
+      //       return token === testOAuthToken ? ['google'] : []
+      //     },
+      //   }
+      // })
       plugin = createTestPlugin()
     })
 

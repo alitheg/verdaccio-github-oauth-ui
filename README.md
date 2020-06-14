@@ -1,5 +1,5 @@
 <h1 align="center">
-  📦🔐 Verdaccio Google OAuth - With UI Support
+  Verdaccio Google OAuth - With UI Support
 </h1>
 
 <p align="center">
@@ -32,7 +32,7 @@
 
 <img src="screenshots/authorize.png" align="right" width="270"/>
 
-This is a Verdaccio plugin that offers Google OAuth integragtion for both the browser and the command line.
+This is a Verdaccio plugin that offers Google OAuth integration for both the browser and the command line.
 
 Thanks to https://github.com/n4bb12/verdaccio-github-oauth-ui for most of the original work on this!
 

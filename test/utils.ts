@@ -45,15 +45,15 @@ export const testPackagesConfig = {
   testPackage5: { access: testUserRepoGroup },
 }
 
-export const testClientId = "CLIENT_ID"
-export const testClientSecret = "CLIENT_SECRET"
-export const testToken = "TOKEN"
-export const testEnterpriseOrigin = "TEST_ENTERPRISE_ORIGIN"
-export const testProviderId = "AUTH_PROVIDER"
-export const testLoginUrl = "LOGIN_URL"
-export const testOAuthCode = "OAUTH_CODE"
-export const testOAuthToken = "OAUTH_TOKEN"
-export const testRegistryToken = "REGISTRY_TOKEN"
+export const authenticated = "$authenticated"
+export const testDomain = "TEST_DOMAIN"
+export const testClientId = "TEST_CLIENT_ID"
+export const testClientSecret = "TEST_CLIENT_SECRET"
+export const testUsername = "test-username"
+export const testProviderId = "test-auth-provider"
+export const testLoginUrl = "test-login-url"
+export const testOAuthCode = "test-code"
+export const testOAuthToken = "test-token"
 export const testMajorVersion = 4
 export const testUiToken = "UI_TOKEN"
 export const testNpmToken = "NPM_TOKEN"
@@ -65,9 +65,9 @@ export function createTestPluginConfig(
   pluginConfig?: Partial<PluginConfig>,
 ): PluginConfig {
   return {
+    "domain": testDomain,
     "client-id": testClientId,
     "client-secret": testClientSecret,
-    token: testToken,
     ...pluginConfig,
   }
 }

@@ -15,34 +15,22 @@ import timekeeper from "timekeeper"
 import Auth from "verdaccio/build/lib/auth"
 import { afterEach, beforeEach, vi } from "vitest"
 
-vi.mock("src/server/github/AuthProvider", () => ({
-  GitHubAuthProvider: vi
+vi.mock("src/server/google/AuthProvider", () => ({
+  GoogleAuthProvider: vi
     .fn()
     .mockImplementation(() => createTestAuthProvider()),
 }))
 
-export const testOrgGroup = `github/org/TEST_ORG`
-export const testOrgTeamGroup = `github/org/TEST_ORG/team/TEST_TEAM`
-export const testOrgRepoGroup = `github/org/TEST_ORG/repo/TEST_REPO`
 export const testUserName = "TEST_USER"
-export const testUserGroup = `github/user/TEST_USER`
-export const testUserRepoGroup = `github/user/TEST_USER/repo/TEST_REPO`
+export const testUserGroup = `google`
 
 export const testProviderGroups = [
   // regular groups
-  testOrgGroup,
-  testOrgTeamGroup,
-  testOrgRepoGroup,
   testUserGroup,
-  testUserRepoGroup,
 ]
 
 export const testPackagesConfig = {
-  testPackage1: { access: testOrgGroup },
-  testPackage2: { access: testOrgTeamGroup },
-  testPackage3: { access: testOrgRepoGroup },
   testPackage4: { access: testUserGroup },
-  testPackage5: { access: testUserRepoGroup },
 }
 
 export const authenticated = "$authenticated"

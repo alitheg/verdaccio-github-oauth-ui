@@ -64,7 +64,7 @@ typecheck() {
   wait
 }
 
-read-env() {
+readenv() {
   if [ -f .env ]; then
     set -a
     source .env
@@ -75,23 +75,23 @@ read-env() {
 #
 # Sinopia CLI test
 #
-oauth-cli-test() {
+oauthclitest() {
   # npx verdaccio-github-oauth-ui --registry http://localhost:4873
-  run cli-login ./dist/cli/index.js --registry http://localhost:4873
+  run clilogin ./dist/cli/index.js --registry http://localhost:4873
 }
 
-cli-whoami() {
-  run cli-whoami npm whoami --registry http://localhost:4873
+cliwhoami() {
+  run cliwhoami npm whoami --registry http://localhost:4873
 }
 
-cli-publish() {
+clipublish() {
   packageName="0.0.0-$(date +%Y%m%d%H%M%S)"
   directory="package/$packageName"
 
-  run cli-publish mkdir -p "$directory"
+  run clipublish mkdir -p "$directory"
   echo "{\"name\":\"oauth-cli-test\",\"version\":\"$packageName\",\"license\":\"UNLICENSED\"}" > "$directory/package.json"
-  run cli-publish cd "$directory"
-  run cli-publish npm publish --registry http://localhost:4873
+  run clipublish cd "$directory"
+  run clipublish npm publish --registry http://localhost:4873
 }
 
 cli() {
@@ -101,7 +101,7 @@ cli() {
 }
 
 docker_() {
-  read-env
+  readenv
 
   run docker docker rm --force verdaccio || true
   run docker docker build --tag verdaccio .

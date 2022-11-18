@@ -20,7 +20,10 @@ export class Cache {
   constructor(
     private readonly authProvider: AuthProvider,
     private readonly cacheTTLms = 10_000, // 10s
-  ) {}
+  ) {
+    this.authProvider = authProvider;
+    this.cacheTTLms = cacheTTLms;
+  }
 
   async getGroups(userName: string): Promise<string[]> {
     let groups: string[] | null = null

@@ -6,6 +6,7 @@ import { ParsedPluginConfig } from "../plugin/Config"
 import { GoogleClient } from "./Client"
 
 export class GoogleAuthProvider implements AuthProvider {
+  private readonly id = "google"
 
   private readonly clientId = this.config.clientId
   private readonly clientSecret = this.config.clientSecret
@@ -29,7 +30,7 @@ export class GoogleAuthProvider implements AuthProvider {
   ) { }
 
   getId() {
-    return "google"
+    return this.id
   }
 
   getLoginUrl(callbackUrl: string) {

@@ -206,8 +206,7 @@ export class ParsedPluginConfig {
             this.parsedRepos.push(parsedRepo)
             this.configuredGroupsMap[group] = true
           }
-
-  ensurePropExists(config, "org")
-  ensurePropExists(config, "client-id")
-  ensurePropExists(config, "client-secret")
+        })
+      })
+    }
 }

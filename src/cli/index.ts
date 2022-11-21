@@ -1,5 +1,6 @@
 import express from "express"
 import open from "open"
+import { logger } from "../logger"
 
 import { cliPort, cliProviderId } from "../constants"
 import { saveNpmToken } from "../npm"
@@ -28,6 +29,7 @@ const server = express()
         saveNpmToken(token)
       }
     } catch (error) {
+      logger.error(error)
       status = "error"
       message = error.message
     }

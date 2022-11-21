@@ -7,7 +7,7 @@ import get from "lodash/get"
 import assert from "ow"
 import process from "process"
 import { PartialDeep, RemoveIndexSignature } from "type-fest"
-import { pluginKey, publicGitHubOrigin } from "../../constants"
+import { pluginKey } from "../../constants"
 import { logger } from "../../logger"
 
 //
@@ -43,9 +43,6 @@ export interface GroupParts {
   providerId?: string
   key1?: string
   value1?: string
-  key2?: string
-  value2?: string
-  key3?: string
 }
 
 export type ParsedUser = {
@@ -53,21 +50,9 @@ export type ParsedUser = {
   user: string
 }
 
-export type ParsedOrg = {
-  group: string
-  org: string
-}
-
-export type ParsedTeam = {
-  group: string
-  org: string
-  team: string
-}
-
-export type ParsedRepo = {
-  group: string
-  owner: string
-  repo: string
+export type ParsedGroup = {
+  group: string,
+  email: string
 }
 
 /**
@@ -98,18 +83,19 @@ function validateNodeExists(config: Config, node: keyof Config) {
   }
 }
 
-function getConfigValue<T>(config: Config, key: string, predicate: any): T {
+function getConfigValue<T>(config: Config, key: string, predicate: any, mandatory: Boolean = false): T {
   let valueOrEnvName = get(config, ["auth", pluginKey, key])
 
   const value = process.env[String(valueOrEnvName)] ?? valueOrEnvName
-
-  try {
-    assert(value, predicate)
-  } catch (error) {
-    logger.error(
-      `Invalid configuration at "auth.${pluginKey}.${key}": ${error.message} — Please check your verdaccio config.`,
-    )
-    process.exit(1)
+  if(value || !value && mandatory) {
+    try {
+      assert(value, predicate)
+    } catch (error) {
+      logger.error(
+        `Invalid configuration at "auth.${pluginKey}.${key}": ${error.message} — Please check your verdaccio config.`,
+      )
+      process.exit(1)
+    }
   }
 
   return value as T
@@ -138,6 +124,7 @@ export class ParsedPluginConfig {
     this.config,
     "domain",
     assert.string.nonEmpty,
+    false
   )
 
   constructor(readonly config: Config) {
@@ -151,11 +138,10 @@ export class ParsedPluginConfig {
 
   readonly configuredGroupsMap: Record<string, boolean> = {}
   readonly parsedUsers: ParsedUser[] = []
-  readonly parsedOrgs: ParsedOrg[] = []
-  readonly parsedTeams: ParsedTeam[] = []
-  readonly parsedRepos: ParsedRepo[] = []
+  readonly parsedGroups: ParsedGroup[] = []
 
   isGroupConfigured(group: string) {
+    logger.log('isConfigured', group, this.configuredGroupsMap[group])
     return !!this.configuredGroupsMap[group]
   }
 
@@ -171,40 +157,30 @@ export class ParsedPluginConfig {
             return
           }
 
-          const [providerId, key1, value1, key2, value2, key3] =
+          logger.log('parsing', group);
+          const [providerId, key1, value1] =
             group.split("/")
 
-          if (providerId !== "github") {
+          if (providerId !== "google") {
             return null
           }
 
-          if (key1 === "user" && !key2) {
+          if (key1 === "user") {
             const parsedUser: ParsedUser = {
               group,
               user: value1,
             }
             this.parsedUsers.push(parsedUser)
-            this.configuredGroupsMap[group] = true
+            this.configuredGroupsMap[value1] = true
           }
 
-          if (key1 === "org" && key2 === "team" && !key3) {
-            const parsedTeam: ParsedTeam = {
+          if (key1 === "group") {
+            const parsedGroup: ParsedGroup = {
               group,
-              org: value1,
-              team: value2,
+              email: value1,
             }
-            this.parsedTeams.push(parsedTeam)
-            this.configuredGroupsMap[group] = true
-          }
-
-          if ((key1 === "org" || key1 === "user") && key2 === "repo" && !key3) {
-            const parsedRepo: ParsedRepo = {
-              group,
-              owner: value1,
-              repo: value2,
-            }
-            this.parsedRepos.push(parsedRepo)
-            this.configuredGroupsMap[group] = true
+            this.parsedGroups.push(parsedGroup)
+            this.configuredGroupsMap[value1] = true
           }
         })
       })

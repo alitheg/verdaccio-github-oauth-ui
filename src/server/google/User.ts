@@ -1,5 +1,5 @@
 /**
- * https://developer.github.com/v3/users/#response-with-public-and-private-profile-information
+ * https://developers.google.com/identity/openid-connect/openid-connect#obtaininguserprofileinformation
  */
 export interface GoogleUser {
   email: string

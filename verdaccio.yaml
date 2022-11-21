@@ -19,10 +19,9 @@ middlewares:
 
 auth:
   google-oauth-ui:
-    domain: GOOGLE_DOMAIN # required, people within this org will be able to authenticate
+    domain: GOOGLE_DOMAIN # optional, only people within this org will be able to authenticate
     client-id: GOOGLE_CLIENT_ID # required
     client-secret: GOOGLE_CLIENT_SECRET # required
-    # enterprise-origin: GITHUB_ENTERPRISE_ORIGIN # optional, set this if you are using github enterprise
   htpasswd:
     file: ./htpasswd
     algorithm: bcrypt
@@ -38,8 +37,8 @@ security:
 
 packages:
   "**":
-    access: github/org/n4bb12-oauth-testing
-    publish: github/org/n4bb12-oauth-testing
+    access: google/group/test@google.com
+    publish: google/group/test@google.com
 
   package1:
     # Limit access to signed-in users.
@@ -50,20 +49,8 @@ packages:
 
   package2:
     # Limit access to users:
-    access: github/user/n4bb12
+    access: google/user/alitheg
 
   package3:
-    # Limit actions to user repository collaborators:
-    access: github/user/n4bb12/repo/dotfiles
-
-  package4:
-    # Limit access to organization members:
-    access: github/org/n4bb12-oauth-testing
-
-  package5:
-    # Limit actions to team members:
-    access: github/org/n4bb12-oauth-testing/team/test-team
-
-  package6:
-    # Limit actions to organization repository collaborators:
-    access: github/org/n4bb12-oauth-testing/repo/test-repo
+    # Limit actions to group members:
+    access: google/group/test@google.com

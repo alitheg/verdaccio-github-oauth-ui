@@ -69,6 +69,10 @@ export class Verdaccio {
     return this.issueVerdaccio4PlusJWT(user, jwtSignOptions)
   }
 
+  getUrlPrefix() {
+    return this.config.url_prefix
+  }
+
   // https://github.com/verdaccio/verdaccio/blob/master/src/api/web/endpoint/user.ts#L31
   private async issueVerdaccio4PlusJWT(
     user: User,

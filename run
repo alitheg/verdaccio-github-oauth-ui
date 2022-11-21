@@ -76,7 +76,11 @@ readenv() {
 # Sinopia CLI test
 #
 oauthclitest() {
-  # npx verdaccio-github-oauth-ui --registry http://localhost:4873
+  # npx verdaccio-google-oauth-ui --registry http://localhost:4873
+  run clilogin ./dist/cli/index.js --registry http://localhost:4873
+}
+
+clilogin() {
   run clilogin ./dist/cli/index.js --registry http://localhost:4873
 }
 
@@ -95,9 +99,9 @@ clipublish() {
 }
 
 cli() {
-  cli-login
-  cli-whoami
-  cli-publish
+  clilogin
+  cliwhoami
+  # clipublish
 }
 
 docker_() {

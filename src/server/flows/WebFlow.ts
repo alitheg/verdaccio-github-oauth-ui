@@ -53,24 +53,23 @@ export class WebFlow implements IPluginMiddleware<any> {
    * automatically reversed by verdaccio before passing it to the plugin.
    */
   callback: Handler = async (req, res, next) => {
-    const withBackLink = true
     try {
       const redirectUrl = this.getRedirectUrl(req)
       const code = await this.provider.getCode(req)
       const token = await this.provider.getToken(code, redirectUrl)
       const username = await this.provider.getUserName(token)
-      const userGroups = await this.provider.getGroups(username)
+      const userGroups = await this.provider.getGroups(token, username)
 
-      // if (this.core.canAuthenticate(username)) {
+      if (this.core.canAuthenticate(username)) {
         const ui = await this.core.createUiCallbackUrl(username, userGroups, token)
         res.redirect(ui)
-      // } else {
-      //   res.send(errorPage)
-      // }
+      } else {
+        res.send(buildErrorPage("Cannot authenticate", true))
+      }
     } catch (error) {
       logger.error(error)
 
-      res.status(500).send(buildErrorPage(error, withBackLink))
+      res.status(500).send(buildErrorPage(error, true))
     }
   }
 

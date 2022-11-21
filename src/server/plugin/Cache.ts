@@ -25,7 +25,7 @@ export class Cache {
     this.cacheTTLms = cacheTTLms;
   }
 
-  async getGroups(userName: string): Promise<string[]> {
+  async getGroups(token: string, userName: string): Promise<string[]> {
     let groups: string[] | null = null
 
     try {
@@ -34,7 +34,7 @@ export class Cache {
       groups = this.cache.get(key)
 
       if (!groups) {
-        groups = await this.authProvider.getGroups(userName)
+        groups = await this.authProvider.getGroups(token, userName)
       }
 
       this.cache.put(key, groups || [], this.cacheTTLms)

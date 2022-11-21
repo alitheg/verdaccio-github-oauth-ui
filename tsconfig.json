@@ -6,7 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "lib": ["ES2021"],
-    "module": "CommonJS",
+    "module": "es6",
     "moduleResolution": "Node",
     "noEmit": true,
     "noImplicitAny": false,

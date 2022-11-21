@@ -86,7 +86,7 @@ export class Plugin implements IPluginMiddleware<any>, IPluginAuth<any> {
         return
       }
 
-      const userGroups = await this.cache.getGroups(userName)
+      const userGroups = await this.cache.getGroups(userToken, userName)
       const user = await this.core.createAuthenticatedUser(userName, userGroups)
 
       callback(null, user.real_groups)
@@ -103,7 +103,9 @@ export class Plugin implements IPluginMiddleware<any>, IPluginAuth<any> {
     config: AllowAccess & PackageAccess,
     callback: AuthAccessCallback,
   ): void {
+    logger.log("allowaccess", config.access);
     if (config.access) {
+      logger.log("allowaccess2", user.groups);
       const grant = config.access.some((group) => user.groups.includes(group))
       callback(null, grant)
     } else {

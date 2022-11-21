@@ -27,9 +27,9 @@
   "scripts": {
     "build": "sh run build",
     "clean": "sh run clean",
-    "cli:login": "sh run cli-login",
-    "cli:publish": "sh run cli-publish",
-    "cli:whoami": "sh run cli-whoami",
+    "cli:login": "sh run clilogin",
+    "cli:publish": "sh run clipublish",
+    "cli:whoami": "sh run cliwhoami",
     "cli": "sh run cli",
     "copy": "sh run copy",
     "coverage": "vitest --coverage",
@@ -50,7 +50,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "global-agent": "^3.0.0",
-    "got": "^12.5.3",
+    "got": "^11",
     "lodash": "^4.17.21",
     "memory-cache": "^0.2.0",
     "minimist": "^1.2.6",
@@ -92,7 +92,7 @@
     "node": "^16"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "http://localhost:4873/"
   },
   "targets": {
     "client": {

@@ -64,9 +64,11 @@ export function createTestVerdaccioConfig(
   verdaccioConfig: Partial<Config> = {},
   pluginConfig: Partial<PluginConfig> = {},
 ) {
+  const testPluginConfig = createTestPluginConfig(pluginConfig)
+  console.log('HI', testPluginConfig)
   return {
     auth: {
-      [pluginKey]: createTestPluginConfig(pluginConfig),
+      [pluginKey]: testPluginConfig,
       ...verdaccioConfig.auth,
     },
     middlewares: {

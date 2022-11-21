@@ -1,5 +1,5 @@
 /**
- * https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#response
+ * https://developers.google.com/identity/openid-connect/openid-connect#server-flow
  */
 export interface GoogleOAuth {
   token_type: string

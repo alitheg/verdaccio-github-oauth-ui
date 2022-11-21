@@ -17,6 +17,7 @@ export class AuthCore {
     userName: string,
     userGroups: string[],
   ): Promise<User> {
+    logger.log("usergroups", userGroups);
     const relevantGroups = userGroups
       .filter((group) => this.config.isGroupConfigured(group))
       .filter(Boolean)
@@ -49,24 +50,13 @@ export class AuthCore {
   }
 
   canAuthenticate(username: string) {
+    logger.log("canauth");
+    // TODO: When to not allow authentication?
     return true;
-    if (!allow) {
-      logger.error(this.getDeniedMessage(username))
-    }
-    return allow
-  }
-
-  canAccess(username: string, groups: string[], requiredGroups: string[]) {
-    if (requiredGroups.includes("$authenticated")) {
-      requiredGroups.push(this.requiredGroup)
-    }
-    const grantedAccess = [];//intersection(groups, requiredGroups)
-
-    const allow = grantedAccess.length === requiredGroups.length
-    if (!allow) {
-      logger.error(this.getDeniedMessage(username))
-    }
-    return allow
+    // if (!allow) {
+    //   logger.error(this.getDeniedMessage(username))
+    // }
+    // return allow
   }
 
   getDeniedMessage(username: string) {
